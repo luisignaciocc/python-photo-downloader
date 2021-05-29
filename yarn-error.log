@@ -1,0 +1,36 @@
+Arguments: 
+  /home/luisignaciocc/.nvm/versions/node/v16.1.0/bin/node /usr/local/bin/yarn add pymongo
+
+PATH: 
+  /home/luisignaciocc/.nvm/versions/node/v16.1.0/bin:/home/luisignaciocc/.linuxbrew/bin:/home/luisignaciocc/.linuxbrew/sbin:/home/luisignaciocc/anaconda3/envs/python-photo-downloader/bin:/home/luisignaciocc/anaconda3/condabin:/home/luisignaciocc/.ebcli-virtual-env/executables:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin
+
+Yarn version: 
+  1.22.10
+
+Node version: 
+  16.1.0
+
+Platform: 
+  linux x64
+
+Trace: 
+  Error: https://registry.yarnpkg.com/pymongo: Not found
+      at Request.params.callback [as _callback] (/usr/local/lib/node_modules/yarn/lib/cli.js:66988:18)
+      at Request.self.callback (/usr/local/lib/node_modules/yarn/lib/cli.js:140662:22)
+      at Request.emit (node:events:365:28)
+      at Request.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:141634:10)
+      at Request.emit (node:events:365:28)
+      at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:141556:12)
+      at Object.onceWrapper (node:events:471:28)
+      at IncomingMessage.emit (node:events:377:35)
+      at endReadableNT (node:internal/streams/readable:1312:12)
+      at processTicksAndRejections (node:internal/process/task_queues:83:21)
+
+npm manifest: 
+  No manifest
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

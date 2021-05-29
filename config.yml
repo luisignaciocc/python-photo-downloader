@@ -1,0 +1,12 @@
+env: local
+auth:
+  local:
+    mongo-user:
+    mongo-pass:
+    mongo-host:
+    mongo-db:
+  prod:
+    mongo-user:
+    mongo-pass:
+    mongo-host:
+    mongo-db:
