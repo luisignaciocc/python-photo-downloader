@@ -72,7 +72,7 @@ class Process():
         self.logger.info('| PROCESS STARTED |')
         self.logger.info(' -----------------')
 
-        for page in range(1, self.page_limit):
+        for page in range(1, self.page_limit + 1):
             try:
                 houses_data = self._get_data(page)
             except:
