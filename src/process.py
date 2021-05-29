@@ -5,6 +5,7 @@ import requests
 from os import path
 from urllib.parse import quote
 from tenacity import retry, stop_after_attempt, stop_after_delay
+from multiprocessing.pool import ThreadPool
 
 class Process():
 
@@ -39,10 +40,17 @@ class Process():
         image_name = f'id-{image_id}-{image_addr}.{image_ext}'
         photo_path = path.join(self.photos_dir, image_name)
         response = requests.get(house["photoURL"])
-        file = open(photo_path, "wb")
-        file.write(response.content)
-        file.close()
-        return image_name
+        try:
+            image_data = response.content
+        except:
+            house['image_name'] = 'not_downloaded'
+        else:
+            file = open(photo_path, "wb")
+            file.write(image_data)
+            file.close()
+            house['image_name'] = image_name
+
+        return house
 
     @retry(stop=stop_after_attempt(10))
     def _get_data(self, page):
@@ -64,22 +72,17 @@ class Process():
         self.logger.info('| PROCESS STARTED |')
         self.logger.info(' -----------------')
 
-        page = 0
-        while page < self.page_limit:
-            page += 1
+        for page in range(1, self.page_limit):
             try:
                 houses_data = self._get_data(page)
             except:
                 self.logger.error(f'Error downloading page {page}, skipping')
                 pass
-            for item in houses_data:
-                if self.db.houses.count_documents({'id':  item['id'] }) == 0:
-                    try:
-                        image_name = self._download_image(item)
-                    except:
-                        image_name = 'not_downloaded'
-                    item['image_name'] = image_name
-                    self.db.houses.insert_one(item)
+
+            results = ThreadPool(10).imap_unordered(self._download_image, houses_data)
+            for result in results:
+                if self.db.houses.count_documents({'id':  result['id'] }) == 0:
+                    self.db.houses.insert_one(result)
 
         self.logger.info(' ------------------')
         self.logger.info('| PROCESS FINISHED |')
