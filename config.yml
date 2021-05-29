@@ -1,11 +1,11 @@
-env: local
+env: ext
 auth:
-  local:
+  docker:
     mongo-user:
     mongo-pass:
     mongo-host:
     mongo-db:
-  prod:
+  ext:
     mongo-user:
     mongo-pass:
     mongo-host:

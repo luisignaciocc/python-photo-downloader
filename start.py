@@ -15,13 +15,15 @@ class Start():
         LOGS_DIR = os.path.join(PROJECT_ROOT, 'log')
         PHOTOS_DIR = os.path.join(PROJECT_ROOT, 'photos')
 
+        self.photos_dir = PHOTOS_DIR
+
         if not os.path.exists(LOGS_DIR):
             os.makedirs(LOGS_DIR)
         if not os.path.exists(PHOTOS_DIR):
             os.makedirs(PHOTOS_DIR)
 
     def main(self):
-        Process(self.cfg).process()
+        Process(self.cfg, self.photos_dir).process()
 
 if __name__ == '__main__':
 
