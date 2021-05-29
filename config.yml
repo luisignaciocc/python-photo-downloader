@@ -1,10 +1,10 @@
-env: ext
+env: docker
 auth:
   docker:
-    mongo-user:
-    mongo-pass:
-    mongo-host:
-    mongo-db:
+    mongo-user: admin
+    mongo-pass: 12345678
+    mongo-host: mongo_db
+    mongo-db: admin
   ext:
     mongo-user:
     mongo-pass:

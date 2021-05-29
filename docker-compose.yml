@@ -1,0 +1,39 @@
+version: '3'
+services:
+  scraper:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - mongo_db
+    networks:
+      - app-tier
+    command: sh -c "/wait && python start.py"
+    environment:
+      WAIT_HOSTS: mongo_db:27017
+    volumes:
+      - ./log:/usr/src/app/log
+      - ./photos:/usr/src/app/photos
+
+  mongo_db:
+    image: mongo
+    restart: unless-stopped
+    expose:
+      - '27017'
+    ports:
+      - '27017:27017'
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: 12345678
+      MONGO_INITDB_DATABASE: admin
+    volumes:
+      - houses-data:/data/db
+    networks:
+      - app-tier
+
+volumes:
+  houses-data:
+
+networks:
+  app-tier:
+    driver: bridge
