@@ -1,4 +1,4 @@
-# Python Books Scraper
+# Python Download Script
 
 Script build to download data from a flaky API.
 
